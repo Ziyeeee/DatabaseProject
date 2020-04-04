@@ -7,6 +7,7 @@ import pymysql
 class GUI(Ui_MainWindow):
     def setupFunction(self):
         self.connectButton.clicked.connect(self.connectDatabase)
+        self.disconnectButton.clicked.connect(self.disconnectDatabase)
 
     def connectDatabase(self):
         try:
@@ -14,6 +15,13 @@ class GUI(Ui_MainWindow):
                                         self.databaseLineEdit.text())
             self.__cursor = self.__db.cursor()
             self.statusbar.showMessage("Connected")
+        except:
+            self.statusbar.showMessage("Error in connecting MySQL")
+
+    def disconnectDatabase(self):
+        try:
+            self.__db.close()
+            self.statusbar.showMessage("Disconnected")
         except:
             self.statusbar.showMessage("Error in connecting MySQL")
 
