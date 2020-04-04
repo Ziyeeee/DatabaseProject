@@ -27,10 +27,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/Anaconda3/python.exe" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.GUIMysql">
     <configuration name="CommandMysql" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="UImysql" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -53,8 +54,54 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="UImysql" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GUIMysql" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="UImysql" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUIMysql.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.GUIMysql" />
+        <item itemvalue="Python.GUI" />
         <item itemvalue="Python.CommandMysql" />
       </list>
     </recent_temporary>
@@ -71,7 +118,9 @@
       <updated>1585723711676</updated>
       <workItem from="1585723714309" duration="20744000" />
       <workItem from="1585817659827" duration="1893000" />
-      <workItem from="1585819701586" duration="1476000" />
+      <workItem from="1585819701586" duration="1545000" />
+      <workItem from="1585821714491" duration="4688000" />
+      <workItem from="1585981816327" duration="2349000" />
     </task>
     <servers />
   </component>
@@ -79,32 +128,46 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="639" height="572" key="GridCell.Tab.0.bottom" timestamp="1585819553791">
+    <state x="463" y="74" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1585982186850">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="639" height="572" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1585819553791" />
-    <state width="639" height="572" key="GridCell.Tab.0.center" timestamp="1585819553791">
+    <state x="463" y="74" key="#com.intellij.ide.macro.MacrosDialog/0.0.1366.738@0.0.1366.738" timestamp="1585982186850" />
+    <state x="446" y="198" width="474" height="345" key="#com.intellij.tools.ToolEditorDialog" timestamp="1585982300129">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="639" height="572" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1585819553791" />
-    <state width="639" height="572" key="GridCell.Tab.0.left" timestamp="1585819553791">
+    <state x="446" y="198" width="474" height="345" key="#com.intellij.tools.ToolEditorDialog/0.0.1366.738@0.0.1366.738" timestamp="1585982300129" />
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1585982236721">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="639" height="572" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1585819553791" />
-    <state width="639" height="572" key="GridCell.Tab.0.right" timestamp="1585819553791">
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1585982236721" />
+    <state width="1323" height="121" key="GridCell.Tab.0.bottom" timestamp="1586006284146">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="639" height="572" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1585819553791" />
-    <state x="184" y="11" key="SettingsEditor" timestamp="1585740161706">
+    <state width="1323" height="121" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1586006284146" />
+    <state width="1323" height="121" key="GridCell.Tab.0.center" timestamp="1586006284146">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1585740161706" />
-    <state x="505" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1585819702419">
+    <state width="1323" height="121" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1586006284146" />
+    <state width="1323" height="121" key="GridCell.Tab.0.left" timestamp="1586006284146">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="505" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1585819702419" />
+    <state width="1323" height="121" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1586006284146" />
+    <state width="1323" height="121" key="GridCell.Tab.0.right" timestamp="1586006284146">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="121" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1586006284146" />
+    <state x="184" y="11" key="SettingsEditor" timestamp="1585982301769">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1585982301769" />
+    <state x="505" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1585981841517">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="505" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1585981841517" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/UImysql$CommandMysql.coverage" NAME="CommandMysql Coverage Results" MODIFIED="1585819270229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UImysql$GUIMysql.coverage" NAME="GUIMysql Coverage Results" MODIFIED="1585992156546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UImysql$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1585992124762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
