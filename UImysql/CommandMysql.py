@@ -246,7 +246,7 @@ def Delete(db, cursor):
 
 
 def main():
-    db = pymysql.connect("******", "******", "******", "******")
+    db = pymysql.connect("localhost", "root", "130e340", "company")
     cursor = db.cursor()
 
     running = True
