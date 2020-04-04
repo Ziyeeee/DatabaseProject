@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -44,6 +44,8 @@ class Ui_MainWindow(object):
         self.keyLable.setObjectName("keyLable")
         self.gridLayout_3.addWidget(self.keyLable, 2, 0, 1, 1)
         self.keyLineEdit = QtWidgets.QLineEdit(self.layoutWidget)
+        self.keyLineEdit.setInputMask("")
+        self.keyLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.keyLineEdit.setObjectName("keyLineEdit")
         self.gridLayout_3.addWidget(self.keyLineEdit, 2, 1, 1, 1)
         self.databaseLable = QtWidgets.QLabel(self.layoutWidget)
