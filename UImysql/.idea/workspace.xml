@@ -15,7 +15,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/DatabaseProject" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1Zvdss7kdUpRrxuB3xt6zDlkzjC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -31,7 +31,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
   </component>
-  <component name="RunManager" selected="Python.GUIMysql">
+  <component name="RunManager" selected="Python.GUI">
     <configuration name="CommandMysql" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="UImysql" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,8 +100,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.GUIMysql" />
         <item itemvalue="Python.GUI" />
+        <item itemvalue="Python.GUIMysql" />
         <item itemvalue="Python.CommandMysql" />
       </list>
     </recent_temporary>
@@ -160,14 +160,14 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1585982301769" />
-    <state x="505" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1585981841517">
+    <state x="505" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1586006611014">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="505" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1585981841517" />
+    <state x="505" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1586006611014" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/UImysql$CommandMysql.coverage" NAME="CommandMysql Coverage Results" MODIFIED="1585819270229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UImysql$GUIMysql.coverage" NAME="GUIMysql Coverage Results" MODIFIED="1585992156546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/UImysql$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1585992124762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UImysql$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1586006759000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
