@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>516</height>
+    <width>751</width>
+    <height>519</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,7 +55,11 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="hostLineEdit"/>
+         <widget class="QLineEdit" name="hostLineEdit">
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="userNameLable">
@@ -65,7 +69,11 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="userNameLineEdit"/>
+         <widget class="QLineEdit" name="userNameLineEdit">
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="keyLable">
@@ -76,6 +84,9 @@
         </item>
         <item row="2" column="1">
          <widget class="QLineEdit" name="keyLineEdit">
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
           <property name="inputMask">
            <string/>
           </property>
@@ -92,7 +103,11 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLineEdit" name="databaseLineEdit"/>
+         <widget class="QLineEdit" name="databaseLineEdit">
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -118,7 +133,7 @@
      <rect>
       <x>250</x>
       <y>10</y>
-      <width>281</width>
+      <width>491</width>
       <height>171</height>
      </rect>
     </property>
@@ -133,9 +148,14 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>261</width>
+       <width>471</width>
        <height>141</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+      </font>
      </property>
     </widget>
    </widget>
@@ -144,22 +164,55 @@
      <rect>
       <x>250</x>
       <y>190</y>
-      <width>281</width>
+      <width>491</width>
       <height>301</height>
      </rect>
     </property>
     <property name="title">
      <string>结果</string>
     </property>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="resulTableWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>261</width>
+       <width>471</width>
        <height>271</height>
       </rect>
      </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>0</number>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>75</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>30</number>
+     </attribute>
+     <attribute name="verticalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </widget>
    <widget class="QTabWidget" name="functionTabWidget">
@@ -208,15 +261,42 @@
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0" colspan="2">
         <layout class="QGridLayout" name="gridLayout_2">
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="superssnLineEditSelect"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="superssnCheckBoxSelect">
+           <property name="text">
+            <string>领导编号</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="dnoLineEditSelect"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="addressLineEditSelect"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="addressCheckBoxSelect">
+           <property name="text">
+            <string>地址</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="dnoCheckBoxSelect">
+           <property name="text">
+            <string>部门编号</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QCheckBox" name="enameCheckBoxSelect">
            <property name="text">
             <string>姓名</string>
            </property>
           </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="enameLineEditSelect"/>
          </item>
          <item row="1" column="0">
           <widget class="QCheckBox" name="essnCheckBoxSelect">
@@ -228,49 +308,22 @@
          <item row="1" column="1">
           <widget class="QLineEdit" name="essnLineEditSelect"/>
          </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="addressCheckBoxSelect">
-           <property name="text">
-            <string>地址</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="addressLineEditSelect"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="superssnCheckBoxSelect">
-           <property name="text">
-            <string>领导</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="superssnLineEditSelect"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="dnoCheckBoxSelect">
-           <property name="text">
-            <string>部门编号</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="dnoLineEditSelect"/>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="enameLineEditSelect"/>
          </item>
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="clearButtonSelect">
+        <widget class="QPushButton" name="doButtonSelect">
          <property name="text">
-          <string>清空</string>
+          <string>执行</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="doButtonSelect">
+        <widget class="QPushButton" name="clearButtonSelect">
          <property name="text">
-          <string>执行</string>
+          <string>清空</string>
          </property>
         </widget>
        </item>
@@ -291,20 +344,6 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_9">
-       <item row="1" column="0">
-        <widget class="QPushButton" name="clearButtonInsert">
-         <property name="text">
-          <string>清空</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="doButtonInsert">
-         <property name="text">
-          <string>执行</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0" colspan="2">
         <layout class="QGridLayout" name="gridLayout_8">
          <item row="0" column="0">
@@ -369,6 +408,20 @@
          </item>
         </layout>
        </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="clearButtonInsert">
+         <property name="text">
+          <string>清空</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="doButtonInsert">
+         <property name="text">
+          <string>执行</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -386,6 +439,13 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_10">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="doButtonUpdate">
+         <property name="text">
+          <string>执行</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0" colspan="2">
         <layout class="QGridLayout" name="gridLayout_11">
          <item row="0" column="1">
@@ -450,17 +510,10 @@
          </item>
         </layout>
        </item>
-       <item row="1" column="0">
+       <item row="1" column="1">
         <widget class="QPushButton" name="clearButtonUpdate">
          <property name="text">
           <string>清空</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="doButtonUpdate">
-         <property name="text">
-          <string>执行</string>
          </property>
         </widget>
        </item>
@@ -474,22 +527,15 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>0</y>
+        <x>11</x>
+        <y>1</y>
         <width>211</width>
         <height>271</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
+      <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0" colspan="2">
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="enameCheckBoxDelete">
-           <property name="text">
-            <string>姓名</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QLineEdit" name="enameLineEditDelete"/>
          </item>
@@ -497,6 +543,16 @@
           <widget class="QCheckBox" name="essnCheckBoxDelete">
            <property name="text">
             <string>编号</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="addressLineEditDelete"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="enameCheckBoxDelete">
+           <property name="text">
+            <string>姓名</string>
            </property>
           </widget>
          </item>
@@ -510,18 +566,18 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="addressLineEditDelete"/>
-         </item>
          <item row="3" column="0">
           <widget class="QCheckBox" name="superssnCheckBoxDelete">
            <property name="text">
-            <string>领导</string>
+            <string>领导编号</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
           <widget class="QLineEdit" name="superssnLineEditDelete"/>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="dnoLineEditDelete"/>
          </item>
          <item row="4" column="0">
           <widget class="QCheckBox" name="dnoCheckBoxDelete">
@@ -530,22 +586,19 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="dnoLineEditDelete"/>
-         </item>
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="clearButtonDelete">
+        <widget class="QPushButton" name="doButtonDelete">
          <property name="text">
-          <string>清空</string>
+          <string>执行</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="doButtonDelete">
+        <widget class="QPushButton" name="clearButtonDelete">
          <property name="text">
-          <string>执行</string>
+          <string>清空</string>
          </property>
         </widget>
        </item>
