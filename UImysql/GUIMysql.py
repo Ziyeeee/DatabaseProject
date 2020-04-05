@@ -15,8 +15,11 @@ class GUI(Ui_MainWindow):
         self.clearButtonSelect.clicked.connect(self.clearSelect)
         self.doButtonSelect.clicked.connect(self.doSelect)
 
-        self.clearButtonInsert.clicked.connect()
-        self.doButtonInsert.clicked.connect()
+        self.clearButtonInsert.clicked.connect(self.clearInsert())
+        self.doButtonInsert.clicked.connect(self.doInsert())
+
+        self.clearButtonUpdate.clicked.connect()
+        self.doButtonUpdate.clicked.connect()
 
     def setResultTable(self):
         self.resulTableWidget.setColumnCount(6)
@@ -127,7 +130,7 @@ class GUI(Ui_MainWindow):
             self.__cursor.execute(self.__sql)
             self.__db.commit()
 
-            self.__sql = "SELECT * FROM employee WHERE essn = "
+            self.__sql = "SELECT * FROM employee"
             self.__sql += "\'" + self.essnLineEditInsert + "\';"
 
             self.__cursor.execute(self.__sql)
@@ -139,6 +142,63 @@ class GUI(Ui_MainWindow):
 
         except:
             self.statusbar.showMessage("Error in INSERT SQL")
+
+    def clearUpdate(self):
+        self.enameCheckBoxUpdate.setCheckState(False)
+        self.addressCheckBoxUpdate.setCheckState(False)
+        self.salaryCheckBoxUpdate.setCheckState(False)
+        self.superssnCheckBoxUpdate.setCheckState(False)
+        self.dnoCheckBoxUpdate.setCheckState(False)
+        self.enameLineEditUpdate.clear()
+        self.essnLineEditUpdate.clear()
+        self.addressLineEditUpdate.clear()
+        self.salaryLineEditUpdate.clear()
+        self.superssnLineEditUpdate.clear()
+        self.dnoLineEditUpdate.clear()
+
+    def doUpdate(self):
+        conditionNum = 0
+        self.__sql = "UPDATE employee\n"
+
+        if self.enameCheckBoxUpdate.isChecked():
+            conditionNum += 1
+            self.__sql += "SET ename = \"" + self.enameLineEditUpdate.text() + "\""
+        elif self.addressCheckBoxUpdate.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += ", "
+            self.__sql += "SET address like \"%" + self.addressLineEditUpdate.text() + "%\""
+        elif self.superssnCheckBoxUpdate.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += ", "
+            self.__sql += "SET superssn = \"" + self.superssnLineEditUpdate.text() + "\""
+        elif self.dnoCheckBoxUpdate.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += ", "
+            self.__sql += "SET dno = \"" + self.dnoLineEditUpdate.text() + "\""
+        self.__sql += ";"
+
+        self.sqlTextBrowser.setText(self.__sql)
+
+        try:
+            self.__cursor.execute(self.__sql)
+            self.__db.commit()
+
+            self.__sql = "SELECT * FROM employee WHERE essn = "
+            self.__sql += "\'" + self.essnLineEditUpdate + "\';"
+
+            self.__cursor.execute(self.__sql)
+            data = self.__cursor.fetchall()
+
+            self.dataToTableWidget(data)
+
+            self.statusbar.showMessage("Update successfully.")
+
+        except:
+            self.statusbar.showMessage("Error in UPDATE SQL")
+
 
 
 if __name__ == "__main__":
