@@ -231,7 +231,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -429,7 +429,7 @@
      <attribute name="title">
       <string>更新</string>
      </attribute>
-     <widget class="QWidget" name="layoutWidget_2">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -439,46 +439,27 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_10">
-       <item row="1" column="0">
-        <widget class="QPushButton" name="doButtonUpdate">
-         <property name="text">
-          <string>执行</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0" colspan="2">
-        <layout class="QGridLayout" name="gridLayout_11">
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="enameLineEditUpdate"/>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="essnLabelUpdate">
+           <property name="text">
+            <string>待更新员工编号</string>
+           </property>
+          </widget>
          </item>
-         <item row="1" column="1">
+         <item row="0" column="2">
           <widget class="QLineEdit" name="essnLineEditUpdate"/>
          </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="salaryLineEditUpdate"/>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="addressLineEditUpdate"/>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="dnoLineEditUpdate"/>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="superssnLineEditUpdate"/>
-         </item>
-         <item row="0" column="0">
+         <item row="1" column="0">
           <widget class="QCheckBox" name="enameCheckBoxUpdate">
            <property name="text">
             <string>姓名</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="essnCheckBoxUpdate">
-           <property name="text">
-            <string>编号</string>
-           </property>
-          </widget>
+         <item row="1" column="1" colspan="2">
+          <widget class="QLineEdit" name="enameLineEditUpdate"/>
          </item>
          <item row="2" column="0">
           <widget class="QCheckBox" name="addressCheckBoxUpdate">
@@ -487,12 +468,18 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="1" colspan="2">
+          <widget class="QLineEdit" name="addressLineEditUpdate"/>
+         </item>
          <item row="3" column="0">
           <widget class="QCheckBox" name="salaryCheckBoxUpdate">
            <property name="text">
             <string>工资</string>
            </property>
           </widget>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <widget class="QLineEdit" name="salaryLineEditUpdate"/>
          </item>
          <item row="4" column="0">
           <widget class="QCheckBox" name="superssnCheckBoxUpdate">
@@ -501,6 +488,9 @@
            </property>
           </widget>
          </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QLineEdit" name="superssnLineEditUpdate"/>
+         </item>
          <item row="5" column="0">
           <widget class="QCheckBox" name="dnoCheckBoxUpdate">
            <property name="text">
@@ -508,7 +498,17 @@
            </property>
           </widget>
          </item>
+         <item row="5" column="1" colspan="2">
+          <widget class="QLineEdit" name="dnoLineEditUpdate"/>
+         </item>
         </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="doButtonUpdate">
+         <property name="text">
+          <string>执行</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="clearButtonUpdate">
