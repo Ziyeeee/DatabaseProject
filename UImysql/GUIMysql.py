@@ -15,11 +15,14 @@ class GUI(Ui_MainWindow):
         self.clearButtonSelect.clicked.connect(self.clearSelect)
         self.doButtonSelect.clicked.connect(self.doSelect)
 
-        self.clearButtonInsert.clicked.connect(self.clearInsert())
-        self.doButtonInsert.clicked.connect(self.doInsert())
+        self.clearButtonInsert.clicked.connect(self.clearInsert)
+        self.doButtonInsert.clicked.connect(self.doInsert)
 
-        self.clearButtonUpdate.clicked.connect()
-        self.doButtonUpdate.clicked.connect()
+        self.clearButtonUpdate.clicked.connect(self.clearUpdate)
+        self.doButtonUpdate.clicked.connect(self.doUpdate)
+
+        self.clearButtonDelete.clicked.connect(self.clearDelete)
+        self.doButtonDelete.clicked.connect(self.doDelete)
 
     def setResultTable(self):
         self.resulTableWidget.setColumnCount(6)
@@ -120,9 +123,9 @@ class GUI(Ui_MainWindow):
 
     def doInsert(self):
         self.__sql = "insert into employee(essn, ename, address, salary, superssn, dno)\n"
-        self.__sql += "value(\'" + self.essnLineEditInsert + "\', \'" + self.enameLineEditInsert + "\', \'" +\
-                      self.addressLineEditInsert + "\', " + self.salaryLineEditInsert + ", \'" +\
-                      self.superssnLineEditInsert + "\', \'" + self.dnoLineEditInsert + "\');"
+        self.__sql += "value(\'" + self.essnLineEditInsert.text() + "\', \'" + self.enameLineEditInsert.text() + "\', \'" +\
+                      self.addressLineEditInsert.text() + "\', " + self.salaryLineEditInsert.text() + ", \'" +\
+                      self.superssnLineEditInsert.text() + "\', \'" + self.dnoLineEditInsert.text() + "\');"
 
         self.sqlTextBrowser.setText(self.__sql)
 
@@ -131,7 +134,6 @@ class GUI(Ui_MainWindow):
             self.__db.commit()
 
             self.__sql = "SELECT * FROM employee"
-            self.__sql += "\'" + self.essnLineEditInsert + "\';"
 
             self.__cursor.execute(self.__sql)
             data = self.__cursor.fetchall()
@@ -178,7 +180,8 @@ class GUI(Ui_MainWindow):
             if conditionNum > 1:
                 self.__sql += ", "
             self.__sql += "SET dno = \"" + self.dnoLineEditUpdate.text() + "\""
-        self.__sql += ";"
+
+        self.__sql += "\nWHERE essn = " + "\'" + self.essnLineEditUpdate.text() + "\';"
 
         self.sqlTextBrowser.setText(self.__sql)
 
@@ -187,7 +190,7 @@ class GUI(Ui_MainWindow):
             self.__db.commit()
 
             self.__sql = "SELECT * FROM employee WHERE essn = "
-            self.__sql += "\'" + self.essnLineEditUpdate + "\';"
+            self.__sql += "\'" + self.essnLineEditUpdate.text() + "\';"
 
             self.__cursor.execute(self.__sql)
             data = self.__cursor.fetchall()
@@ -199,6 +202,66 @@ class GUI(Ui_MainWindow):
         except:
             self.statusbar.showMessage("Error in UPDATE SQL")
 
+
+    def clearDelete(self):
+        self.enameCheckBoxDelete.setCheckState(False)
+        self.essnCheckBoxDelete.setCheckState(False)
+        self.addressCheckBoxDelete.setCheckState(False)
+        self.superssnCheckBoxDelete.setCheckState(False)
+        self.dnoCheckBoxDelete.setCheckState(False)
+        self.enameLineEditDelete.clear()
+        self.essnLineEditDelete.clear()
+        self.addressLineEditDelete.clear()
+        self.superssnLineEditDelete.clear()
+        self.dnoLineEditDelete.clear()
+
+
+    def doDelete(self):
+        conditionNum = 0
+        self.__sql = "DELETE FROM employee\nWHERE "
+
+        if self.enameCheckBoxDelete.isChecked():
+            conditionNum += 1
+            self.__sql += "ename = \"" + self.enameLineEditDelete.text() + "\""
+        elif self.essnCheckBoxDelete.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += " and "
+            self.__sql += "essn = \"" + self.essnLineEditDelete.text() + "\""
+        elif self.addressCheckBoxDelete.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += " and "
+            self.__sql += "address like \"%" + self.addressLineEditDelete.text() + "%\""
+        elif self.superssnCheckBoxDelete.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += " and "
+            self.__sql += "superssn = \"" + self.superssnLineEditDelete.text() + "\""
+        elif self.dnoCheckBoxDelete.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += " and "
+            self.__sql += "dno = \"" + self.dnoLineEditDelete.text() + "\""
+        self.__sql += ";"
+
+        self.sqlTextBrowser.setText(self.__sql)
+
+        try:
+            self.__cursor.execute(self.__sql)
+            self.__db.commit()
+
+            self.__sql = "SELECT * FROM employee"
+
+            self.__cursor.execute(self.__sql)
+            data = self.__cursor.fetchall()
+
+            self.dataToTableWidget(data)
+
+            self.statusbar.showMessage("Delete successfully.")
+
+        except:
+            self.statusbar.showMessage("Error in DELETE SQL")
 
 
 if __name__ == "__main__":
