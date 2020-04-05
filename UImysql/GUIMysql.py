@@ -10,6 +10,7 @@ class GUI(Ui_MainWindow):
     def setupFunction(self):
         self.connectButton.clicked.connect(self.connectDatabase)
         self.disconnectButton.clicked.connect(self.disconnectDatabase)
+
         self.clearButtonSelect.clicked.connect(self.clearSelect)
         self.doButtonSelect.clicked.connect(self.doSelect)
 
