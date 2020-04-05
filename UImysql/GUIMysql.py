@@ -78,22 +78,22 @@ class GUI(Ui_MainWindow):
         if self.enameCheckBoxSelect.isChecked():
             conditionNum += 1
             self.__sql += "ename = \"" + self.enameLineEditSelect.text() + "\""
-        elif self.essnCheckBoxSelect.isChecked():
+        if self.essnCheckBoxSelect.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "essn = \"" + self.essnLineEditSelect.text() + "\""
-        elif self.addressCheckBoxSelect.isChecked():
+        if self.addressCheckBoxSelect.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "address like \"%" + self.addressLineEditSelect.text() + "%\""
-        elif self.superssnCheckBoxSelect.isChecked():
+        if self.superssnCheckBoxSelect.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "superssn = \"" + self.superssnLineEditSelect.text() + "\""
-        elif self.dnoCheckBoxSelect.isChecked():
+        if self.dnoCheckBoxSelect.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
@@ -160,26 +160,31 @@ class GUI(Ui_MainWindow):
 
     def doUpdate(self):
         conditionNum = 0
-        self.__sql = "UPDATE employee\n"
+        self.__sql = "UPDATE employee\nSET "
 
         if self.enameCheckBoxUpdate.isChecked():
             conditionNum += 1
-            self.__sql += "SET ename = \"" + self.enameLineEditUpdate.text() + "\""
-        elif self.addressCheckBoxUpdate.isChecked():
+            self.__sql += "ename = \"" + self.enameLineEditUpdate.text() + "\""
+        if self.addressCheckBoxUpdate.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += ", "
-            self.__sql += "SET address like \"%" + self.addressLineEditUpdate.text() + "%\""
-        elif self.superssnCheckBoxUpdate.isChecked():
+            self.__sql += "address = \"" + self.addressLineEditUpdate.text() + "\""
+        if self.salaryCheckBoxUpdate.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += ", "
-            self.__sql += "SET superssn = \"" + self.superssnLineEditUpdate.text() + "\""
-        elif self.dnoCheckBoxUpdate.isChecked():
+            self.__sql += "salary = \"" + self.salaryLineEditUpdate.text() + "\""
+        if self.superssnCheckBoxUpdate.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += ", "
-            self.__sql += "SET dno = \"" + self.dnoLineEditUpdate.text() + "\""
+            self.__sql += "superssn = \"" + self.superssnLineEditUpdate.text() + "\""
+        if self.dnoCheckBoxUpdate.isChecked():
+            conditionNum += 1
+            if conditionNum > 1:
+                self.__sql += ", "
+            self.__sql += "dno = \"" + self.dnoLineEditUpdate.text() + "\""
 
         self.__sql += "\nWHERE essn = " + "\'" + self.essnLineEditUpdate.text() + "\';"
 
@@ -223,22 +228,22 @@ class GUI(Ui_MainWindow):
         if self.enameCheckBoxDelete.isChecked():
             conditionNum += 1
             self.__sql += "ename = \"" + self.enameLineEditDelete.text() + "\""
-        elif self.essnCheckBoxDelete.isChecked():
+        if self.essnCheckBoxDelete.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "essn = \"" + self.essnLineEditDelete.text() + "\""
-        elif self.addressCheckBoxDelete.isChecked():
+        if self.addressCheckBoxDelete.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "address like \"%" + self.addressLineEditDelete.text() + "%\""
-        elif self.superssnCheckBoxDelete.isChecked():
+        if self.superssnCheckBoxDelete.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
             self.__sql += "superssn = \"" + self.superssnLineEditDelete.text() + "\""
-        elif self.dnoCheckBoxDelete.isChecked():
+        if self.dnoCheckBoxDelete.isChecked():
             conditionNum += 1
             if conditionNum > 1:
                 self.__sql += " and "
