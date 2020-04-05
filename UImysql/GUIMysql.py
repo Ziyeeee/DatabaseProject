@@ -8,11 +8,34 @@ class GUI(Ui_MainWindow):
     __sql = ''
 
     def setupFunction(self):
+        self.setResultTable()
         self.connectButton.clicked.connect(self.connectDatabase)
         self.disconnectButton.clicked.connect(self.disconnectDatabase)
 
         self.clearButtonSelect.clicked.connect(self.clearSelect)
         self.doButtonSelect.clicked.connect(self.doSelect)
+
+        self.clearButtonInsert.clicked.connect()
+        self.doButtonInsert.clicked.connect()
+
+    def setResultTable(self):
+        self.resulTableWidget.setColumnCount(6)
+        self.resulTableWidget.setHorizontalHeaderLabels(["姓名", "编号", "地址", "工资", "领导编号", "部门编号"])
+
+        self.resulTableWidget.resizeRowsToContents()
+        self.resulTableWidget.setColumnWidth(0, 50)
+        self.resulTableWidget.setColumnWidth(1, 50)
+        self.resulTableWidget.setColumnWidth(2, 200)
+        self.resulTableWidget.setColumnWidth(3, 75)
+        self.resulTableWidget.setColumnWidth(4, 75)
+        self.resulTableWidget.setColumnWidth(5, 75)
+
+    def dataToTableWidget(self, data):
+        self.resulTableWidget.setRowCount(len(data))
+
+        for i in range(0, len(data)):
+            for j in range(0, 6):
+                self.resulTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(data[i][j])))
 
     def connectDatabase(self):
         try:
@@ -44,7 +67,7 @@ class GUI(Ui_MainWindow):
 
     def doSelect(self):
         conditionNum = 0
-        self.__sql = 'SELECT *\nFROM employee\nWHERE '
+        self.__sql = "SELECT *\nFROM employee\nWHERE "
 
         if self.enameCheckBoxSelect.isChecked():
             conditionNum += 1
@@ -77,27 +100,45 @@ class GUI(Ui_MainWindow):
             self.__cursor.execute(self.__sql)
             data = self.__cursor.fetchall()
 
-            self.resulTableWidget.setRowCount(len(data))
-            self.resulTableWidget.setColumnCount(6)
-            self.resulTableWidget.setHorizontalHeaderLabels(["姓名", "编号", "地址", "工资", "领导编号", "部门编号"])
+            self.dataToTableWidget(data)
 
-            self.resulTableWidget.resizeRowsToContents()
-            self.resulTableWidget.setColumnWidth(0, 50)
-            self.resulTableWidget.setColumnWidth(1, 50)
-            self.resulTableWidget.setColumnWidth(2, 200)
-            self.resulTableWidget.setColumnWidth(3, 75)
-            self.resulTableWidget.setColumnWidth(4, 75)
-            self.resulTableWidget.setColumnWidth(5, 75)
-
-            for i in range(0, len(data)):
-                for j in range(0, 6):
-                    self.resulTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(data[i][j])))
-
-                self.statusbar.showMessage("Select successfully. Total " + str(len(data)) + " items")
+            self.statusbar.showMessage("Select successfully. Total " + str(len(data)) + " items")
 
         except:
             self.statusbar.showMessage("Error in SELECT SQL")
 
+    def clearInsert(self):
+        self.enameLineEditInsert.clear()
+        self.essnLineEditInsert.clear()
+        self.addressLineEditInsert.clear()
+        self.salaryLineEditInsert.clear()
+        self.superssnLineEditInsert.clear()
+        self.dnoLineEditInsert.clear()
+
+    def doInsert(self):
+        self.__sql = "insert into employee(essn, ename, address, salary, superssn, dno)\n"
+        self.__sql += "value(\'" + self.essnLineEditInsert + "\', \'" + self.enameLineEditInsert + "\', \'" +\
+                      self.addressLineEditInsert + "\', " + self.salaryLineEditInsert + ", \'" +\
+                      self.superssnLineEditInsert + "\', \'" + self.dnoLineEditInsert + "\');"
+
+        self.sqlTextBrowser.setText(self.__sql)
+
+        try:
+            self.__cursor.execute(self.__sql)
+            self.__db.commit()
+
+            self.__sql = "SELECT * FROM employee WHERE essn = "
+            self.__sql += "\'" + self.essnLineEditInsert + "\';"
+
+            self.__cursor.execute(self.__sql)
+            data = self.__cursor.fetchall()
+
+            self.dataToTableWidget(data)
+
+            self.statusbar.showMessage("Insert successfully.")
+
+        except:
+            self.statusbar.showMessage("Error in INSERT SQL")
 
 
 if __name__ == "__main__":
