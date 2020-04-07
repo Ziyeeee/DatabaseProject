@@ -20,7 +20,7 @@ def Select1(cursor):
 
 # 查询项目所在地为PLOCATION的部门名称
 def Select2(cursor):
-    sql = "SELECT dname FROM department WHERE department.dno = (SELECT dno FROM project WHERE project.plocation = "
+    sql = "SELECT dname FROM department WHERE department.dno in (SELECT dno FROM project WHERE project.plocation = "
     plocation = input("项目所在地：")
     sql = sql + "\"" + plocation + "\");"
     print(sql)
