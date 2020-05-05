@@ -25,6 +25,9 @@
      </item>
      <item>
       <widget class="QComboBox" name="chooseComboBox">
+       <property name="frame">
+        <bool>true</bool>
+       </property>
        <item>
         <property name="text">
          <string>用户</string>
@@ -80,7 +83,20 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="nameLineEdit"/>
+      <widget class="QLineEdit" name="nameLineEdit">
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
      <item row="2" column="1">
       <spacer name="verticalSpacer">
@@ -103,7 +119,11 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="keyLineEdit"/>
+      <widget class="QLineEdit" name="keyLineEdit">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -123,7 +143,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="forgotPushButton">
        <property name="text">
         <string>忘记密码</string>
        </property>
@@ -177,12 +197,24 @@
        <property name="text">
         <string>注册</string>
        </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="signInPushButton">
        <property name="text">
         <string>登录</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

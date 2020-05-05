@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'signUpDialog.ui'
+#
+# Created by: PyQt5 UI code generator 5.9.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(220, 227)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setObjectName("formLayout")
+        self.nameLable = QtWidgets.QLabel(Dialog)
+        self.nameLable.setObjectName("nameLable")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.nameLable)
+        self.nameLineEdit = QtWidgets.QLineEdit(Dialog)
+        self.nameLineEdit.setFrame(True)
+        self.nameLineEdit.setDragEnabled(False)
+        self.nameLineEdit.setPlaceholderText("")
+        self.nameLineEdit.setClearButtonEnabled(False)
+        self.nameLineEdit.setObjectName("nameLineEdit")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.nameLineEdit)
+        self.keyLable = QtWidgets.QLabel(Dialog)
+        self.keyLable.setObjectName("keyLable")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.keyLable)
+        self.keyLineEdit = QtWidgets.QLineEdit(Dialog)
+        self.keyLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.keyLineEdit.setObjectName("keyLineEdit")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.keyLineEdit)
+        self.confirmLabel = QtWidgets.QLabel(Dialog)
+        self.confirmLabel.setObjectName("confirmLabel")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.confirmLabel)
+        self.que1Label = QtWidgets.QLabel(Dialog)
+        self.que1Label.setObjectName("que1Label")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.que1Label)
+        self.ans1Label = QtWidgets.QLabel(Dialog)
+        self.ans1Label.setObjectName("ans1Label")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.ans1Label)
+        self.que2Label = QtWidgets.QLabel(Dialog)
+        self.que2Label.setObjectName("que2Label")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.que2Label)
+        self.ans2Label = QtWidgets.QLabel(Dialog)
+        self.ans2Label.setObjectName("ans2Label")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.ans2Label)
+        self.confirmLineEdit = QtWidgets.QLineEdit(Dialog)
+        self.confirmLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.confirmLineEdit.setObjectName("confirmLineEdit")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.confirmLineEdit)
+        self.que1LineEdit = QtWidgets.QLineEdit(Dialog)
+        self.que1LineEdit.setObjectName("que1LineEdit")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.que1LineEdit)
+        self.ans1LineEdit = QtWidgets.QLineEdit(Dialog)
+        self.ans1LineEdit.setObjectName("ans1LineEdit")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.ans1LineEdit)
+        self.que2LineEdit = QtWidgets.QLineEdit(Dialog)
+        self.que2LineEdit.setObjectName("que2LineEdit")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.que2LineEdit)
+        self.ans2LineEdit = QtWidgets.QLineEdit(Dialog)
+        self.ans2LineEdit.setObjectName("ans2LineEdit")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.ans2LineEdit)
+        self.verticalLayout.addLayout(self.formLayout)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(68, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.nameLable.setText(_translate("Dialog", "昵称"))
+        self.keyLable.setText(_translate("Dialog", "密码"))
+        self.confirmLabel.setText(_translate("Dialog", "确认密码"))
+        self.que1Label.setText(_translate("Dialog", "密保问题1"))
+        self.ans1Label.setText(_translate("Dialog", "答案1"))
+        self.que2Label.setText(_translate("Dialog", "密保问题2"))
+        self.ans2Label.setText(_translate("Dialog", "答案2"))
+        self.pushButton.setText(_translate("Dialog", "注册"))
+

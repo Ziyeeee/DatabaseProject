@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys, time
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -414,3 +415,15 @@ class Ui_Form(object):
         self.infoNextPagePushButton.setText(_translate("Form", "下一页"))
         self.buyerTabWidget.setTabText(self.buyerTabWidget.indexOf(self.infoTab), _translate("Form", "个人信息"))
 
+class UI(QtWidgets.QWidget, Ui_Form):
+
+    def __init__(self):
+        super(UI, self).__init__()
+        self.setupUi(self)
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    myUI = UI()
+    myUI.show()
+    myUI.close()
+    sys.exit(app.exec_())
