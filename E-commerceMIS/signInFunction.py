@@ -3,7 +3,9 @@ from PyQt5 import QtWidgets
 from signIn import Ui_Form
 from forgotDialogFunction import forgotDialog
 from buyerSignUpFunction import buyerDialog
-from storeSirnUpFunction import storeDialog
+from storeSignUpFunction import storeDialog
+from buyerUIFunction import BuyerUI
+from storeUIFunction import StoreUI
 
 
 class SignIn(QtWidgets.QWidget, Ui_Form):
@@ -63,7 +65,9 @@ class SignIn(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchone()
             if self.data[0] == self.keyLineEdit.text():
-                print('!!!')
+                self.close()
+                self.buyerUI = BuyerUI()
+                self.buyerUI.show()
             else:
                 QtWidgets.QMessageBox.warning(self, 'Warning', '密码错误')
 
@@ -72,9 +76,12 @@ class SignIn(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchone()
             if self.data[0] == self.keyLineEdit.text():
-                print('!!!')
+                self.close()
+                self.storeUI = StoreUI()
+                self.storeUI.show()
             else:
                 QtWidgets.QMessageBox.warning(self, 'Warning', '密码错误')
+                
         elif self.chooseComboBox.currentIndex() == 2:
             self.sql = 'select Akey from admin where Aname = \"' + self.nameLineEdit.text() + '\";'
             self.dbcursor.execute(self.sql)

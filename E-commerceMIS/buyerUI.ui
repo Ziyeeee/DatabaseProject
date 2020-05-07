@@ -912,16 +912,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="infoUpdatePushButton">
+             <widget class="QPushButton" name="infoAddPushButton">
               <property name="text">
-               <string>修改</string>
+               <string>添加</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="infoAddPushButton">
+             <widget class="QPushButton" name="infoUpdatePushButton">
               <property name="text">
-               <string>添加</string>
+               <string>修改</string>
               </property>
              </widget>
             </item>
