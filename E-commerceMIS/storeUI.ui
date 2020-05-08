@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>483</width>
-    <height>378</height>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,7 +71,7 @@
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>50</number>
+          <number>75</number>
          </attribute>
          <row>
           <property name="text">
@@ -311,13 +311,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="infoSnameLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="credit">
                <property name="text">
@@ -326,21 +319,7 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLabel" name="infoCreditLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="principal">
-               <property name="text">
-                <string>负责人</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLabel" name="infoPrincipalLabel">
+              <widget class="QLabel" name="creditLabel">
                <property name="text">
                 <string>TextLabel</string>
                </property>
@@ -353,39 +332,31 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLabel" name="infoTelLabel">
+             <item row="4" column="0">
+              <widget class="QLabel" name="ID">
                <property name="text">
-                <string>TextLabel</string>
+                <string>身份证号</string>
                </property>
               </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="principal">
+               <property name="text">
+                <string>负责人</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="SnameLineEdit"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="principalLineEdit"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="TelLineEdit"/>
              </item>
              <item row="4" column="1">
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>18</width>
-                 <height>18</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="sales">
-               <property name="text">
-                <string>销售额</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLabel" name="infoSalesLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
+              <widget class="QLineEdit" name="IDLineEdit"/>
              </item>
             </layout>
            </item>
