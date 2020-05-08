@@ -28,7 +28,7 @@ class buyerDialog(QWidget, Ui_Dialog):
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchall()
 
-            if str(self.data) == 0:
+            if len(self.data) == 0:
                 self.id = '001'
             else:
                 if int(self.data[-1][0]) > 98:

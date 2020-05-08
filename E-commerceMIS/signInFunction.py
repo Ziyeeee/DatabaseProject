@@ -61,27 +61,27 @@ class SignIn(QtWidgets.QWidget, Ui_Form):
 
     def signIn(self):
         if self.chooseComboBox.currentIndex() == 0:
-            self.sql = 'select Bkey from buyer where Bname = \"' + self.nameLineEdit.text() + '\";'
+            self.sql = 'select Bid, Bkey from buyer where Bname = \"' + self.nameLineEdit.text() + '\";'
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchone()
-            if self.data[0] == self.keyLineEdit.text():
+            if self.data[1] == self.keyLineEdit.text():
                 self.close()
-                self.buyerUI = BuyerUI()
+                self.buyerUI = BuyerUI(self.db, self.dbcursor, self.data[0])
                 self.buyerUI.show()
             else:
                 QtWidgets.QMessageBox.warning(self, 'Warning', '密码错误')
 
         elif self.chooseComboBox.currentIndex() == 1:
-            self.sql = 'select Bkey from store where Sname = \"' + self.nameLineEdit.text() + '\";'
+            self.sql = 'select Sid, Bkey from store where Sname = \"' + self.nameLineEdit.text() + '\";'
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchone()
-            if self.data[0] == self.keyLineEdit.text():
+            if self.data[1] == self.keyLineEdit.text():
                 self.close()
-                self.storeUI = StoreUI()
+                self.storeUI = StoreUI(self.db, self.dbcursor, self.data[0])
                 self.storeUI.show()
             else:
                 QtWidgets.QMessageBox.warning(self, 'Warning', '密码错误')
-                
+
         elif self.chooseComboBox.currentIndex() == 2:
             self.sql = 'select Akey from admin where Aname = \"' + self.nameLineEdit.text() + '\";'
             self.dbcursor.execute(self.sql)
