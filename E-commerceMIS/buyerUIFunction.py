@@ -250,7 +250,8 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
                    'from store, commodity, warehouse, cart ' \
                    'where cart.Bid = \"' + self.Bid \
                    + '\" and cart.Cid = commodity.Cid and cart.size = commodity.stockSize ' \
-                     'and commodity.Cid = warehouse.stockCid and commodity.stockSize = warehouse.stockSize;'
+                     'and commodity.Cid = warehouse.stockCid and commodity.stockSize = warehouse.stockSize ' \
+                     'and store.Sid = commodity.Sid;'
         self.dbcursor.execute(self.sql)
         self.cartData = self.dbcursor.fetchall()
 
