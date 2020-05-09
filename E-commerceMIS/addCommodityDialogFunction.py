@@ -25,7 +25,7 @@ class AddCommodityDialog(QWidget, Ui_Dialog):
             QMessageBox.warning(self, 'Warning', '这是一个新的仓库')
 
     def confirm(self):
-        if self.nameLineEdit == '':
+        if self.nameLineEdit.text() == '':
             QMessageBox.warning(self, 'Warning', '商品名不能为空')
         elif self.addressTextEdit.toPlainText() == '':
             QMessageBox.warning(self, 'Warning', '仓库地址不能为空')

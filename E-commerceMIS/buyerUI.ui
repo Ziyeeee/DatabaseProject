@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>442</width>
-    <height>421</height>
+    <width>468</width>
+    <height>417</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
          <item>
           <widget class="QPushButton" name="commoditySearchPushButton">
            <property name="text">
-            <string>搜索</string>
+            <string>搜索/刷新</string>
            </property>
           </widget>
          </item>
@@ -56,7 +56,7 @@
           <number>5</number>
          </property>
          <attribute name="horizontalHeaderVisible">
-          <bool>true</bool>
+          <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderCascadingSectionResizes">
           <bool>false</bool>
@@ -213,6 +213,13 @@
               </property>
              </spacer>
             </item>
+            <item>
+             <widget class="QPushButton" name="cartRefreshPushButton">
+              <property name="text">
+               <string>刷新</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -252,9 +259,39 @@
              </spacer>
             </item>
             <item>
+             <widget class="QLabel" name="cartSize">
+              <property name="text">
+               <string>尺码：</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="cartSizeLabel">
               <property name="text">
                <string>“尺码”</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_23">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>30</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="cartNum">
+              <property name="text">
+               <string>数量：</string>
               </property>
              </widget>
             </item>
@@ -294,6 +331,13 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="cartPrice">
+              <property name="text">
+               <string>价格：</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="cartPriseLabel">
@@ -436,6 +480,30 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_18">
+         <item>
+          <spacer name="horizontalSpacer_25">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>刷新</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QWidget" name="orderWidget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
@@ -560,20 +628,6 @@
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <item>
-             <widget class="QLabel" name="orderDateLabel">
-              <property name="text">
-               <string>“日期”</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="orderTimeLabel">
-              <property name="text">
-               <string>“时间”</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <spacer name="horizontalSpacer_9">
               <property name="orientation">
@@ -836,56 +890,34 @@
              <string>地址簿</string>
             </property>
             <layout class="QFormLayout" name="formLayout_2">
-             <item row="0" column="0">
+             <item row="1" column="0">
               <widget class="QLabel" name="Recipient">
                <property name="text">
                 <string>收件人</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="infoRnameLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="infoRnameLineEdit"/>
              </item>
-             <item row="1" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="Tel">
                <property name="text">
                 <string>电话</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="infoTelLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="infoTelLineEdit"/>
              </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="address">
                <property name="text">
                 <string>地址</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="postcode">
-               <property name="text">
-                <string>邮编</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="1">
-              <widget class="QLabel" name="infoPostcodeLabel">
-               <property name="text">
-                <string>TextLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
               <widget class="QTextBrowser" name="infoAddressTextBrowser">
                <property name="maximumSize">
                 <size>
@@ -893,9 +925,22 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="readOnly">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="postcode">
+               <property name="text">
+                <string>邮编</string>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
+              <widget class="QLineEdit" name="infoPostcodeLineEdit"/>
+             </item>
+             <item row="5" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
                 <spacer name="horizontalSpacer_3">
@@ -913,7 +958,31 @@
                <item>
                 <widget class="QLabel" name="infoPageLabel">
                  <property name="text">
-                  <string>TextLabel</string>
+                  <string>“页码”</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_20">
+               <item>
+                <spacer name="horizontalSpacer_24">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="infoRefreshPushButton">
+                 <property name="text">
+                  <string>刷新</string>
                  </property>
                 </widget>
                </item>

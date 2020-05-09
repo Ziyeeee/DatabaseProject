@@ -64,9 +64,6 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
     def addCommodity(self):
         self.addCommodityDialog = AddCommodityDialog(self.db, self.dbcursor, self.Sid)
         self.addCommodityDialog.show()
-        self.getAllData()
-        self.page = 1
-        self.reShow()
 
     def updataCommodity(self):
         if self.page * 3 - 3 + 0 < len(self.data) and self.haveCheckBox1 and self.checkBox1.isChecked():
@@ -175,9 +172,6 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.db.commit()
 
         QtWidgets.QMessageBox.information(self, 'Information', '删除成功')
-        self.getAllData()
-        self.page = 1
-        self.reShow()
 
     def lastPage(self):
         self.page = self.page - 1
