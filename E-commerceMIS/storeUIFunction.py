@@ -28,7 +28,6 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         self.initTable()
 
         self.commodityPageLabel.setText(str(self.page))
-        self.enablePagePushButton()
         self.reShow()
 
         self.sql = 'select Sname, Scredit, principal, Tel, ID_card ' \
@@ -70,7 +69,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         self.reShow()
 
     def updataCommodity(self):
-        if self.page * 3 - 3 + 0 < len(self.data) and self.checkBox1.isChecked():
+        if self.page * 3 - 3 + 0 < len(self.data) and self.haveCheckBox1 and self.checkBox1.isChecked():
             self.sql = 'update warehouse set stockSize = \"' + self.commodityTableWidget.item(0, 5).text() \
                        + '\", stock = \"' + self.commodityTableWidget.item(0, 6).text() \
                        + '\" where stockCid = \"' + self.data[self.page * 3 - 3 + 0][7] \
@@ -90,7 +89,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.db.commit()
 
-        if self.page * 3 - 3 + 1 < len(self.data) and self.checkBox2.isChecked():
+        if self.page * 3 - 3 + 1 < len(self.data) and self.haveCheckBox2 and self.checkBox2.isChecked():
             self.sql = 'update warehouse set stockSize = \"' + self.commodityTableWidget.item(1, 5).text() \
                        + '\", stock = \"' + self.commodityTableWidget.item(1, 6).text() \
                        + '\" where stockCid = \"' + self.data[self.page * 3 - 3 + 1][7] \
@@ -110,7 +109,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.db.commit()
 
-        if self.page * 3 - 3 + 2 < len(self.data) and self.checkBox3.isChecked():
+        if self.page * 3 - 3 + 2 < len(self.data) and self.haveCheckBox3 and self.checkBox3.isChecked():
             self.sql = 'update warehouse set stockSize = \"' + self.commodityTableWidget.item(2, 5).text() \
                        + '\", stock = \"' + self.commodityTableWidget.item(2, 6).text() \
                        + '\" where stockCid = \"' + self.data[self.page * 3 - 3 + 2][7] \
@@ -133,7 +132,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         QtWidgets.QMessageBox.information(self, 'Information', '修改成功')
 
     def deleteCommodity(self):
-        if self.page * 3 - 3 + 0 < len(self.data) and self.checkBox1.isChecked():
+        if self.page * 3 - 3 + 0 < len(self.data) and self.haveCheckBox1 and self.checkBox1.isChecked():
             self.sql = 'delete from commodity where Cid = \"' + self.data[self.page * 3 - 3 + 0][7] \
                        + '\" and stockSize = \"' + self.data[self.page * 3 - 3 + 0][4] + '\";'
 
@@ -147,7 +146,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.db.commit()
 
-        if self.page * 3 - 3 + 1 < len(self.data) and self.checkBox2.isChecked():
+        if self.page * 3 - 3 + 1 < len(self.data) and self.haveCheckBox2 and self.checkBox2.isChecked():
             self.sql = 'delete from commodity where Cid = \"' + self.data[self.page * 3 - 3 + 1][7] \
                        + '\" and stockSize = \"' + self.data[self.page * 3 - 3 + 1][4] + '\";'
 
@@ -161,7 +160,7 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.db.commit()
 
-        if self.page * 3 - 3 + 2 < len(self.data) and self.checkBox3.isChecked():
+        if self.page * 3 - 3 + 2 < len(self.data) and self.haveCheckBox3 and self.checkBox3.isChecked():
             self.sql = 'delete from commodity where Cid = \"' + self.data[self.page * 3 - 3 + 2][7] \
                        + '\" and stockSize = \"' + self.data[self.page * 3 - 3 + 2][4] + '\";'
 
@@ -184,7 +183,6 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         self.page = self.page - 1
         self.showData()
         self.showPage()
-        self.clearCheckBox()
         self.enablePagePushButton()
         self.enableFuncPushButton()
 
@@ -192,7 +190,6 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         self.page = self.page + 1
         self.showData()
         self.showPage()
-        self.clearCheckBox()
         self.enablePagePushButton()
         self.enableFuncPushButton()
 
@@ -206,6 +203,10 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
         QtWidgets.QMessageBox.information(self, 'Information', '修改成功')
 
     def initTable(self):
+        self.haveCheckBox1 = False
+        self.haveCheckBox2 = False
+        self.haveCheckBox3 = False
+
         if self.page * 3 - 3 + 0 < len(self.data):
             self.widget1 = QtWidgets.QWidget()
             self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget1)
@@ -221,6 +222,9 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.textBrowser4 = QtWidgets.QTextBrowser()
             self.commodityTableWidget.setCellWidget(0, 7, self.textBrowser4)
             self.textBrowser1.setReadOnly(False)
+
+            self.checkBox1.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox1 = True
 
         if self.page * 3 - 3 + 1 < len(self.data):
             self.widget2 = QtWidgets.QWidget()
@@ -238,6 +242,9 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.commodityTableWidget.setCellWidget(1, 7, self.textBrowser5)
             self.textBrowser2.setReadOnly(False)
 
+            self.checkBox2.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox2 = True
+
         if self.page * 3 - 3 + 2 < len(self.data):
             self.widget3 = QtWidgets.QWidget()
             self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget3)
@@ -254,9 +261,8 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             self.commodityTableWidget.setCellWidget(2, 7, self.textBrowser6)
             self.textBrowser3.setReadOnly(False)
 
-        self.checkBox1.stateChanged.connect(self.enableFuncPushButton)
-        self.checkBox2.stateChanged.connect(self.enableFuncPushButton)
-        self.checkBox3.stateChanged.connect(self.enableFuncPushButton)
+            self.checkBox3.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox2 = True
 
     def enablePagePushButton(self):
         if self.page == 1:
@@ -271,12 +277,27 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
 
     def enableFuncPushButton(self):
         self.commodityAddPushButton.setEnabled(True)
-        if self.checkBox1.isChecked() or self.checkBox2.isChecked() or self.checkBox3.isChecked():
-            self.commodityUpdatePushButton.setEnabled(True)
-            self.commodityDeletePushButton.setEnabled(True)
+        if self.page * 3 - 3 + 1 == len(self.data):
+            if self.checkBox1.isChecked():
+                self.commodityUpdatePushButton.setEnabled(True)
+                self.commodityDeletePushButton.setEnabled(True)
+            else:
+                self.commodityUpdatePushButton.setEnabled(False)
+                self.commodityDeletePushButton.setEnabled(False)
+        elif self.page * 3 - 3 + 2 == len(self.data):
+            if self.checkBox1.isChecked() or self.checkBox2.isChecked():
+                self.commodityUpdatePushButton.setEnabled(True)
+                self.commodityDeletePushButton.setEnabled(True)
+            else:
+                self.commodityUpdatePushButton.setEnabled(False)
+                self.commodityDeletePushButton.setEnabled(False)
         else:
-            self.commodityUpdatePushButton.setEnabled(False)
-            self.commodityDeletePushButton.setEnabled(False)
+            if self.checkBox1.isChecked() or self.checkBox2.isChecked() or self.checkBox3.isChecked():
+                self.commodityUpdatePushButton.setEnabled(True)
+                self.commodityDeletePushButton.setEnabled(True)
+            else:
+                self.commodityUpdatePushButton.setEnabled(False)
+                self.commodityDeletePushButton.setEnabled(False)
 
     def getAllData(self):
         self.sql = 'select Cname, Cdescribe, price, discount, commodity.stockSize, stock, address, Cid, warehouse.Wid ' \
@@ -308,13 +329,9 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
 
     def reShow(self):
         self.showData()
+        self.enablePagePushButton()
         self.enableFuncPushButton()
         self.showPage()
-
-    def clearCheckBox(self):
-        self.checkBox1.setCheckState(False)
-        self.checkBox2.setCheckState(False)
-        self.checkBox3.setCheckState(False)
 
     def clearTable(self):
         self.commodityTableWidget.clearContents()

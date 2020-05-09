@@ -68,7 +68,11 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLineEdit" name="numLineEdit"/>
+      <widget class="QLineEdit" name="numLineEdit">
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

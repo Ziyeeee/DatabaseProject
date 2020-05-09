@@ -1,5 +1,5 @@
 from addCartDialog import Ui_Dialog
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMessageBox
 
 
 class AddCartDialog(QWidget, Ui_Dialog):
@@ -19,12 +19,22 @@ class AddCartDialog(QWidget, Ui_Dialog):
         self.stockLabel.setText('库存' + str(self.stock) + '件')
         self.numHorizontalSlider.setMaximum(int(self.stock))
 
-        self.numLineEdit.editingFinished.connect(self.showLineEdit())
-        self.numHorizontalSlider.valueChanged.connect(self.showHorizontalSlider)
+        self.numLineEdit.editingFinished.connect(self.showHorizontalSlider)
+        self.numHorizontalSlider.valueChanged.connect(self.showLineEdit)
+        self.pushButton.clicked.connect(self.addCart)
 
     def showLineEdit(self):
         self.numLineEdit.setText(str(self.numHorizontalSlider.value()))
 
     def showHorizontalSlider(self):
-        self.numHorizontalSlider.setValue(self.numLineEdit.text())
+        self.numHorizontalSlider.setValue(int(self.numLineEdit.text()))
 
+    def addCart(self):
+        self.sql = 'insert into cart(Cid, Bid, size, num) ' \
+                   'value (\"' + self.Cid + '\", \"' + self.Bid + '\", \"' + self.stockSize + '\", \"' \
+                   + self.numLineEdit.text() + '\");'
+        self.dbcursor.execute(self.sql)
+        self.db.commit()
+
+        QMessageBox.information(self, 'Information', '添加成功')
+        self.close()

@@ -66,5 +66,6 @@ class Ui_Dialog(object):
         self.nameLabel.setText(_translate("Dialog", "TextLabel"))
         self.stockLabel.setText(_translate("Dialog", "TextLabel"))
         self.numLabel.setText(_translate("Dialog", "选择数量"))
+        self.numLineEdit.setText(_translate("Dialog", "1"))
         self.pushButton.setText(_translate("Dialog", "确定"))
 

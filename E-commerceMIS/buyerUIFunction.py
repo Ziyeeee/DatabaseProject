@@ -26,11 +26,13 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.initTable()
 
         self.commodityPageLabel.setText(str(self.page))
-        self.enablePagePushButton()
         self.reShow()
 
         self.commoditySearchPushButton.clicked.connect(self.searchCommodity)
         self.addCartPushButton.clicked.connect(self.addCart)
+
+        self.commodityLastPushButton.clicked.connect(self.lastPage)
+        self.commodityNextPushButton.clicked.connect(self.nextPage)
 
     def searchCommodity(self):
         self.sql = 'select Cname, Cdescribe, commodity.stockSize, price, discount, commodity.Cid, stock, address ' \
@@ -43,17 +45,47 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.reShow()
 
     def addCart(self):
-        for i in range(0, 3):
-            if i == 0:
-                self.addCartDialog = AddCartDialog(self.db, self.dbcursor, self.Bid,
-                                                   self.data[self.page * 3 - 3 + i][5],
-                                                   self.data[self.page * 3 - 3 + i][0],
-                                                   self.data[self.page * 3 - 3 + i][2],
-                                                   self.data[self.page * 3 - 3 + i][6])
-                self.addCartDialog.show()
+        if self.haveCheckBox1 and self.checkBox1.isChecked():
+            self.addCartDialog1 = AddCartDialog(self.db, self.dbcursor, self.Bid,
+                                               self.data[self.page * 3 - 3 + 0][5],
+                                               self.data[self.page * 3 - 3 + 0][0],
+                                               self.data[self.page * 3 - 3 + 0][2],
+                                               self.data[self.page * 3 - 3 + 0][6])
+            self.addCartDialog1.show()
+        if self.haveCheckBox2 and self.checkBox2.isChecked():
+            self.addCartDialog2 = AddCartDialog(self.db, self.dbcursor, self.Bid,
+                                               self.data[self.page * 3 - 3 + 1][5],
+                                               self.data[self.page * 3 - 3 + 1][0],
+                                               self.data[self.page * 3 - 3 + 1][2],
+                                               self.data[self.page * 3 - 3 + 1][6])
+            self.addCartDialog2.show()
+        if self.haveCheckBox3 and self.checkBox3.isChecked():
+            self.addCartDialog3 = AddCartDialog(self.db, self.dbcursor, self.Bid,
+                                               self.data[self.page * 3 - 3 + 2][5],
+                                               self.data[self.page * 3 - 3 + 2][0],
+                                               self.data[self.page * 3 - 3 + 2][2],
+                                               self.data[self.page * 3 - 3 + 2][6])
+            self.addCartDialog3.show()
 
+    def lastPage(self):
+        self.page = self.page - 1
+        self.showData()
+        self.showPage()
+        self.enablePagePushButton()
+        self.enableFuncPushButton()
+
+    def nextPage(self):
+        self.page = self.page + 1
+        self.showData()
+        self.showPage()
+        self.enablePagePushButton()
+        self.enableFuncPushButton()
 
     def initTable(self):
+        self.haveCheckBox1 = False
+        self.haveCheckBox2 = False
+        self.haveCheckBox3 = False
+
         if self.page * 3 - 3 + 0 < len(self.data):
             self.widget1 = QtWidgets.QWidget()
             self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget1)
@@ -66,6 +98,9 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
             self.commodityTableWidget.setCellWidget(0, 0, self.widget1)
             self.textBrowser1 = QtWidgets.QTextBrowser()
             self.commodityTableWidget.setCellWidget(0, 2, self.textBrowser1)
+
+            self.checkBox1.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox1 = True
 
         if self.page * 3 - 3 + 1 < len(self.data):
             self.widget2 = QtWidgets.QWidget()
@@ -80,6 +115,9 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
             self.textBrowser2 = QtWidgets.QTextBrowser()
             self.commodityTableWidget.setCellWidget(1, 2, self.textBrowser2)
 
+            self.checkBox2.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox2 = True
+
         if self.page * 3 - 3 + 2 < len(self.data):
             self.widget3 = QtWidgets.QWidget()
             self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget3)
@@ -93,9 +131,8 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
             self.textBrowser3 = QtWidgets.QTextBrowser()
             self.commodityTableWidget.setCellWidget(2, 2, self.textBrowser3)
 
-        self.checkBox1.stateChanged.connect(self.enableFuncPushButton)
-        self.checkBox2.stateChanged.connect(self.enableFuncPushButton)
-        self.checkBox3.stateChanged.connect(self.enableFuncPushButton)
+            self.checkBox3.stateChanged.connect(self.enableFuncPushButton)
+            self.haveCheckBox3 = True
 
     def enablePagePushButton(self):
         if self.page == 1:
@@ -109,10 +146,21 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
             self.commodityNextPushButton.setEnabled(True)
 
     def enableFuncPushButton(self):
-        if self.checkBox1.isChecked() or self.checkBox2.isChecked() or self.checkBox3.isChecked():
-            self.addCartPushButton.setEnabled(True)
+        if self.page * 3 - 3 + 1 == len(self.data):
+            if self.checkBox1.isChecked():
+                self.addCartPushButton.setEnabled(True)
+            else:
+                self.addCartPushButton.setEnabled(False)
+        elif self.page * 3 - 3 + 2 == len(self.data):
+            if self.checkBox1.isChecked() or self.checkBox2.isChecked():
+                self.addCartPushButton.setEnabled(True)
+            else:
+                self.addCartPushButton.setEnabled(False)
         else:
-            self.addCartPushButton.setEnabled(False)
+            if self.checkBox1.isChecked() or self.checkBox2.isChecked() or self.checkBox3.isChecked():
+                self.addCartPushButton.setEnabled(True)
+            else:
+                self.addCartPushButton.setEnabled(False)
 
     def getAllData(self):
         self.sql = 'select Cname, Cdescribe, commodity.stockSize, price, discount, commodity.Cid, stock, address ' \
@@ -148,13 +196,9 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
 
     def reShow(self):
         self.showData()
+        self.enablePagePushButton()
         self.enableFuncPushButton()
         self.showPage()
-
-    def clearCheckBox(self):
-        self.checkBox1.setCheckState(False)
-        self.checkBox2.setCheckState(False)
-        self.checkBox3.setCheckState(False)
 
     def clearTable(self):
         self.commodityTableWidget.clearContents()
