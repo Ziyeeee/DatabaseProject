@@ -323,7 +323,7 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
     def showOrder(self):
         if len(self.orderData) > 0:
             self.orderSnameLabel.setText(self.orderData[self.orderPage - 1][0])
-            self.orderNumLabel.setText(self.orderData[self.orderPage - 1][1])
+            self.orderIdLabel.setText(self.orderData[self.orderPage - 1][1])
             self.orderCnameLabel.setText(self.orderData[self.orderPage - 1][2])
             self.orderDescribeTextBrowser.setText(self.orderData[self.orderPage - 1][3])
             self.orderSizeLabel.setText(self.orderData[self.orderPage - 1][4])
@@ -336,7 +336,7 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
             elif self.orderData[self.orderPage - 1][7] == '2':
                 self.orderStatusLabel.setText('已签收')
 
-            self.orderPageLabel.setText('第' + str(self.cartPage) + '页')
+            self.orderPageLabel.setText('第' + str(self.orderPage) + '页')
 
             if self.orderPage == 1:
                 self.orderLastPagePushButton.setEnabled(False)

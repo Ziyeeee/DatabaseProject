@@ -55,28 +55,22 @@ class BuyDialog(QWidget, Ui_Dialog):
             self.db.commit()
 
         # order
-        self.sql = 'select Oid from orderform where Bid = \"' + self.Bid + '\" and Sid = \"' + self.Sid + '\" and Lstatus = \"0\";'
+        self.sql = 'select Oid from orderform;'
         self.dbcursor.execute(self.sql)
-        self.OidData = self.dbcursor.fetchall()
-        if len(self.OidData) == 0:
-            self.sql = 'select Oid from orderform;'
-            self.dbcursor.execute(self.sql)
-            self.data = self.dbcursor.fetchall()
+        self.data = self.dbcursor.fetchall()
 
-            if len(self.data) == 0:
-                self.Oid = '001'
-            else:
-                if int(self.data[-1][0]) > 98:
-                    self.Oid = str(int(self.data[-1][0]) + 1)
-                elif 99 > int(self.data[-1][0]) > 8:
-                    self.Oid = '0' + str(int(self.data[-1][0]) + 1)
-                elif int(self.data[-1][0]) < 9:
-                    self.Oid = '00' + str(int(self.data[-1][0]) + 1)
+        if len(self.data) == 0:
+            self.Oid = '001'
         else:
-            self.Oid = self.Oid[0]
+            if int(self.data[-1][0]) > 98:
+                self.Oid = str(int(self.data[-1][0]) + 1)
+            elif 99 > int(self.data[-1][0]) > 8:
+                self.Oid = '0' + str(int(self.data[-1][0]) + 1)
+            elif int(self.data[-1][0]) < 9:
+                self.Oid = '00' + str(int(self.data[-1][0]) + 1)
 
         self.sql = 'insert into orderform(Oid, Bid, Sid, size, num, price, Lstatus) ' \
-                   'value(\"' + self.Oid + '\",  \"' + self.Bid + '\",  \"' + self.Sid + '\",  \"'+ self.stockSize \
+                   'value(\"' + self.Oid + '\",  \"' + self.Bid + '\",  \"' + self.Sid + '\",  \"' + self.stockSize \
                    + '\",  \"' + str(self.num) + '\",  \"' + str(self.price) + '\",  \"0\");'
         self.dbcursor.execute(self.sql)
         self.db.commit()
