@@ -36,6 +36,10 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.getAllCart()
         self.showCart()
 
+        # orderTab
+        self.getAllOrder()
+        self.showOrder()
+
         # infoTab
         self.getBuyerInfo()
         self.showBuyerInfo()
@@ -54,6 +58,12 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.cartDeletePushButton.clicked.connect(self.deletCart)
         self.cartLastPagePushButton.clicked.connect(self.cartLastPage)
         self.cartNextPagePushButton.clicked.connect(self.cartNextPage)
+
+        # orderTab
+        self.orderRefreshPushButton.clicked.connect(self.reShowOrder)
+        self.orderDeletePushButton.clicked.connect(self.deletOrder)
+        self.orderLastPagePushButton.clicked.connect(self.orderLastPage)
+        self.orderNextPagePushButton.clicked.connect(self.orderNextPage)
 
         # infoTab
         self.infoRefreshPushButton.clicked.connect(self.reShowAddress)
@@ -299,6 +309,79 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.getAllCart()
         self.showCart()
 
+    # orderTab
+    def getAllOrder(self):
+        self.sql = 'select store.Sname, orderform.Oid, commodity.Cname, commodity.Cdescribe, orderform.size, ' \
+                   'orderform.num, orderform.price, orderform.Lstatus ' \
+                   'from store, commodity, orderform, commodity_order ' \
+                   'where orderform.Sid = store.Sid and orderform.Oid = commodity_order.Oid ' \
+                   'and commodity_order.Cid = commodity.Cid and commodity_order.Csize = commodity.stockSize ' \
+                   'and orderform.Bid = \"' + self.Bid + '\";'
+        self.dbcursor.execute(self.sql)
+        self.orderData = self.dbcursor.fetchall()
+
+    def showOrder(self):
+        if len(self.orderData) > 0:
+            self.orderSnameLabel.setText(self.orderData[self.orderPage - 1][0])
+            self.orderNumLabel.setText(self.orderData[self.orderPage - 1][1])
+            self.orderCnameLabel.setText(self.orderData[self.orderPage - 1][2])
+            self.orderDescribeTextBrowser.setText(self.orderData[self.orderPage - 1][3])
+            self.orderSizeLabel.setText(self.orderData[self.orderPage - 1][4])
+            self.orderNumLabel.setText(str(self.orderData[self.orderPage - 1][5]))
+            self.orderPriceLabel.setText(str(self.orderData[self.orderPage - 1][6]))
+            if self.orderData[self.orderPage - 1][7] == '0':
+                self.orderStatusLabel.setText('未发货')
+            elif self.orderData[self.orderPage - 1][7] == '1':
+                self.orderStatusLabel.setText('正在运输')
+            elif self.orderData[self.orderPage - 1][7] == '2':
+                self.orderStatusLabel.setText('已签收')
+
+            self.orderPageLabel.setText('第' + str(self.cartPage) + '页')
+
+            if self.orderPage == 1:
+                self.orderLastPagePushButton.setEnabled(False)
+            else:
+                self.orderLastPagePushButton.setEnabled(True)
+            if self.orderPage == len(self.orderData):
+                self.orderNextPagePushButton.setEnabled(False)
+            else:
+                self.orderNextPagePushButton.setEnabled(True)
+        else:
+            self.orderDeletePushButton.setEnabled(False)
+            self.orderLastPagePushButton.setEnabled(False)
+            self.orderNextPagePushButton.setEnabled(False)
+
+    def deletOrder(self):
+        self.sql = 'delete from logistics ' \
+                   'where Oid = \"' + self.orderData[self.orderPage - 1][1] + '\";'
+        self.dbcursor.execute(self.sql)
+        self.db.commit()
+
+        self.sql = 'delete from commodity_order ' \
+                   'where Oid = \"' + self.orderData[self.orderPage - 1][1] + '\";'
+        self.dbcursor.execute(self.sql)
+        self.db.commit()
+
+        self.sql = 'delete from orderform ' \
+                   'where Oid = \"' + self.orderData[self.orderPage - 1][1] + '\";'
+        self.dbcursor.execute(self.sql)
+        self.db.commit()
+
+        QtWidgets.QMessageBox.information(self, 'Information', '已删除')
+
+    def orderLastPage(self):
+        self.orderPage = self.orderPage - 1
+        self.showOrder()
+
+    def orderNextPage(self):
+        self.orderPage = self.orderPage + 1
+        self.showOrder()
+
+    def reShowOrder(self):
+        self.orderPage = 1
+        self.getAllOrder()
+        self.showOrder()
+
     # infoTab
     def getBuyerInfo(self):
         self.sql = 'select Bname, Scredit from buyer where Bid = \"' + self.Bid + '\";'
@@ -364,7 +447,6 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
         self.addressPage = 1
         self.getAllAddress()
         self.showAddress()
-
 
 
 if __name__ == "__main__":

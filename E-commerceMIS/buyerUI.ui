@@ -495,7 +495,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="orderRefreshPushButton">
            <property name="text">
             <string>刷新</string>
            </property>
@@ -529,7 +529,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="orderNumLabel">
+             <widget class="QLabel" name="orderIdLabel">
               <property name="text">
                <string>“订单号”</string>
               </property>
@@ -574,6 +574,13 @@
              </spacer>
             </item>
             <item>
+             <widget class="QLabel" name="orderSize">
+              <property name="text">
+               <string>尺码：</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLabel" name="orderSizeLabel">
               <property name="text">
                <string>“尺码”</string>
@@ -581,7 +588,30 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="orderNumLabel_2">
+             <spacer name="horizontalSpacer_26">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>30</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="orderNum">
+              <property name="text">
+               <string>数量：</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="orderNumLabel">
               <property name="text">
                <string>“数量”</string>
               </property>
@@ -618,7 +648,14 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="orderPriseLabel">
+             <widget class="QLabel" name="orderPrice">
+              <property name="text">
+               <string>价格：</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="orderPriceLabel">
               <property name="text">
                <string>“价格”</string>
               </property>
