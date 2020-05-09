@@ -1,13 +1,11 @@
-import signInFunction
+from signInFunction import showSignInUI
 import pymysql
 import sys
 from PyQt5 import QtWidgets
 
 
-db = pymysql.connect("localhost", "root", "130e340", "e-commerce")
+db = pymysql.connect("******", "******", "******", "******")
 cursor = db.cursor()
 
-signInFunction.SignIn.db = db
-signInFunction.SignIn.dbcursor = cursor
-signInFunction.showSignInUI()
+showSignInUI(db, cursor)
 
