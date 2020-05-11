@@ -210,25 +210,26 @@ class BuyerUI(QtWidgets.QWidget, Ui_Form):
 
     def showCommodityData(self):
         self.clearTable()
-        for i in range(0, 3):
-            if self.commodityPage * 3 - 3 + i < len(self.commodityData):
-                for j in [1, 3]:
-                    self.commodityTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(
-                        str(self.commodityData[self.commodityPage * 3 - 3 + i][j - 1])))
-                if i == 0:
-                    self.textBrowser1.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
-                    self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
-                        str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
-                elif i == 1:
-                    self.textBrowser2.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
-                    self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
-                        str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
-                elif i == 2:
-                    self.textBrowser3.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
-                    self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
-                        str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
-            else:
-                break
+        if len(self.commodityData) > 0:
+            for i in range(0, 3):
+                if self.commodityPage * 3 - 3 + i < len(self.commodityData):
+                    for j in [1, 3]:
+                        self.commodityTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(
+                            str(self.commodityData[self.commodityPage * 3 - 3 + i][j - 1])))
+                    if i == 0:
+                        self.textBrowser1.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
+                        self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                            str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
+                    elif i == 1:
+                        self.textBrowser2.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
+                        self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                            str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
+                    elif i == 2:
+                        self.textBrowser3.setText(self.commodityData[self.commodityPage * 3 - 3 + i][1])
+                        self.commodityTableWidget.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                            str(self.commodityData[self.commodityPage * 3 - 3 + i][3] * self.commodityData[self.commodityPage * 3 - 3 + i][4])))
+                else:
+                    break
 
     def showCommodityPage(self):
         self.commodityPageLabel.setText('第' + str(self.commodityPage) + '页')

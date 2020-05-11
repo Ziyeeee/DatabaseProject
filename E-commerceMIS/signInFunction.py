@@ -6,6 +6,7 @@ from buyerSignUpFunction import buyerDialog
 from storeSignUpFunction import storeDialog
 from buyerUIFunction import BuyerUI
 from storeUIFunction import StoreUI
+from adminUIFunction import  AdminUI
 
 
 class SignIn(QtWidgets.QWidget, Ui_Form):
@@ -87,7 +88,9 @@ class SignIn(QtWidgets.QWidget, Ui_Form):
             self.dbcursor.execute(self.sql)
             self.data = self.dbcursor.fetchone()
             if self.data[0] == self.keyLineEdit.text():
-                print('!!!')
+                self.close()
+                self.adminUI = AdminUI(self.db, self.dbcursor)
+                self.adminUI.show()
             else:
                 QtWidgets.QMessageBox.warning(self, 'Warning', '密码错误')
 

@@ -285,13 +285,16 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
             else:
                 self.commodityUpdatePushButton.setEnabled(False)
                 self.commodityDeletePushButton.setEnabled(False)
-        else:
+        elif self.page * 3 - 3 + 3 == len(self.data):
             if self.checkBox1.isChecked() or self.checkBox2.isChecked() or self.checkBox3.isChecked():
                 self.commodityUpdatePushButton.setEnabled(True)
                 self.commodityDeletePushButton.setEnabled(True)
             else:
                 self.commodityUpdatePushButton.setEnabled(False)
                 self.commodityDeletePushButton.setEnabled(False)
+        else:
+            self.commodityUpdatePushButton.setEnabled(False)
+            self.commodityDeletePushButton.setEnabled(False)
 
     def getAllData(self):
         self.sql = 'select Cname, Cdescribe, price, discount, commodity.stockSize, stock, address, Cid, warehouse.Wid ' \
@@ -302,21 +305,22 @@ class StoreUI(QtWidgets.QWidget, Ui_Form):
 
     def showData(self):
         self.clearTable()
-        for i in range(0, 3):
-            if self.page * 3 - 3 + i < len(self.data):
-                for j in [1, 3, 4, 5, 6]:
-                    self.commodityTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(self.data[self.page * 3 - 3 + i][j - 1])))
-                if i == 0:
-                    self.textBrowser1.setText(self.data[self.page * 3 - 3 + i][1])
-                    self.textBrowser4.setText(self.data[self.page * 3 - 3 + i][6])
-                elif i == 1:
-                    self.textBrowser2.setText(self.data[self.page * 3 - 3 + i][1])
-                    self.textBrowser5.setText(self.data[self.page * 3 - 3 + i][6])
-                elif i == 2:
-                    self.textBrowser3.setText(self.data[self.page * 3 - 3 + i][1])
-                    self.textBrowser6.setText(self.data[self.page * 3 - 3 + i][6])
-            else:
-                break
+        if len(self.data) > 0:
+            for i in range(0, 3):
+                if self.page * 3 - 3 + i < len(self.data):
+                    for j in [1, 3, 4, 5, 6]:
+                        self.commodityTableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(self.data[self.page * 3 - 3 + i][j - 1])))
+                    if i == 0:
+                        self.textBrowser1.setText(self.data[self.page * 3 - 3 + i][1])
+                        self.textBrowser4.setText(self.data[self.page * 3 - 3 + i][6])
+                    elif i == 1:
+                        self.textBrowser2.setText(self.data[self.page * 3 - 3 + i][1])
+                        self.textBrowser5.setText(self.data[self.page * 3 - 3 + i][6])
+                    elif i == 2:
+                        self.textBrowser3.setText(self.data[self.page * 3 - 3 + i][1])
+                        self.textBrowser6.setText(self.data[self.page * 3 - 3 + i][6])
+                else:
+                    break
 
     def showPage(self):
         self.commodityPageLabel.setText('第' + str(self.page) + '页')

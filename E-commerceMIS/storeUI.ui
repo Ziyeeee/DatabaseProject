@@ -32,7 +32,7 @@
          <item>
           <widget class="QPushButton" name="commoditySearchPushButton">
            <property name="text">
-            <string>搜索</string>
+            <string>搜索/刷新</string>
            </property>
           </widget>
          </item>

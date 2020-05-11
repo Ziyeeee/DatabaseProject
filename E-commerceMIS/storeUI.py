@@ -181,7 +181,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.commoditySearchPushButton.setText(_translate("Form", "搜索"))
+        self.commoditySearchPushButton.setText(_translate("Form", "搜索/刷新"))
         self.commodityTableWidget.setSortingEnabled(False)
         item = self.commodityTableWidget.verticalHeaderItem(0)
         item.setText(_translate("Form", "新建行"))
