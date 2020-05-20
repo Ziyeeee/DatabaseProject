@@ -64,7 +64,7 @@ ExtMem库提供了如下API函数：
 
 > 将缓冲区buf内的块blk写入磁盘上地址为addr的磁盘块。若写入成功，则返回0；否则，返回-1。同时，缓冲区buf的I/O次数加1。
 
-文件test.c中给出了ExtMem库使用方法的具体示例。
+文件experimentTest/test.c中给出了ExtMem库使用方法的具体示例。
 
 ## 数据准备
 
