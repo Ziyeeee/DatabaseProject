@@ -2,73 +2,101 @@
 #include <stdio.h>
 #include "extmem.h"
 
+void sort(unsigned char *blk[8], int numOfMember);
+
 int main(int argc, char **argv)
 {
     Buffer buf; /* A buffer */
-    unsigned char *blk; /* A pointer to a block */
-    int i = 0;
+    unsigned char *blk[8]; /*pointers to a block */
+    int numOfMember = 4;
+    int addr = 1;
+    int i, j;
 
     /* Initialize the buffer */
-    if (!initBuffer(520, 64, &buf))
+    if(!initBuffer(520, 64, &buf))
     {
         perror("Buffer Initialization Failed!\n");
         return -1;
     }
 
-    /* Get a new block in the buffer */
-    blk = getNewBlockInBuffer(&buf);
-
-    /* Fill data into the block */
-    for (i = 0; i < 8; i++)
-        *(blk + i) = 'a' + i;
-
-    /* Write the block to the hard disk */
-    if (writeBlockToDisk(blk, 8888, &buf) != 0)
+    for(i = 0; i < 4; i++)
     {
-        perror("Writing Block Failed!\n");
-        return -1;
-    }
-
-    /* Read the block from the hard disk */
-    if ((blk = readBlockFromDisk(1, &buf)) == NULL)
-    {
-        perror("Reading Block Failed!\n");
-        return -1;
-    }
-
-    /* Process the data in the block */
-    int X = -1;
-    int Y = -1;
-    int addr = -1;
-
-    char str[5];
-    printf("block 1:\n");
-    for (i = 0; i < 7; i++) //一个blk存7个元组加一个地址
-    {
-
-        for (int k = 0; k < 4; k++)
+        for(j = 0; j < numOfMember; j++)
         {
-            str[k] = *(blk + i*8 + k);
+            blk[j] = readBlockFromDisk(addr, &buf);
+            addr++;
         }
-        X = atoi(str);
-        for (int k = 0; k < 4; k++)
+        sort(blk, numOfMember);
+        for(j = 0; j < numOfMember; j++)
         {
-            str[k] = *(blk + i*8 + 4 + k);
+            freeBlockInBuffer(blk[j], &buf);
         }
-        Y = atoi(str);
-        printf("(%d, %d) ", X, Y);
     }
-    for (int k = 0; k < 4; k++)
-    {
-        str[k] = *(blk + i*8 + k);
-    }
-    addr = atoi(str);
-    printf("\nnext address = %d \n", addr);
 
-
-    printf("\n");
-    printf("IO's is %d\n", buf.numIO); /* Check the number of IO's */
 
     return 0;
 }
 
+void sort(unsigned char *blk[8], int numOfMember)
+{
+    int i, j, k, m, n;
+    int X, Y;
+    int maxPosi, maxPosj;
+    char str[5];
+    char temp;
+
+    for(i = 0; i < numOfMember; i++)
+    {
+        for(j = 0; j < 7; j++)
+        {
+            for(k = 0; k < 4; k++)
+            {
+                str[k] = *(blk[i] + j*8 + k);
+            }
+            X = atoi(str);
+
+            n = j + 1;
+            for(m = i; m < numOfMember; m++)
+            {
+                while(n < 7)
+                {
+                    for(k = 0; k < 4; k++)
+                    {
+                        str[k] = *(blk[m] + n*8 + k);
+                    }
+                    Y = atoi(str);
+                    if(Y > X)
+                    {
+                        maxPosi = m;
+                        maxPosj = n;
+                        X = Y;
+                    }
+                    n++;
+                }
+                n = 0;
+            }
+            for(k = 0; k < 8; k++)
+            {
+                temp = *(blk[i] + j*8 + k);
+                *(blk[i] + j*8 + k) = *(blk[maxPosi] + maxPosj*8 + k);
+                *(blk[maxPosi] + maxPosj*8 + k) = temp;
+            }
+        }
+    }
+
+    for(i = 0; i < numOfMember; i++)
+    {
+        for(j = 0; j < 7; j++)
+        {
+            for(k = 0; k < 4; k++)
+            {
+                str[k] = *(blk[i] + j*8 + k);
+            }
+            X = atoi(str);
+            printf("%d ", X);
+        }
+    }
+    printf("\n");
+
+    return;
+}
