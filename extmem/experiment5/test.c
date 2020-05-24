@@ -207,7 +207,6 @@ void join()
                 blkCount[k] = 0;
             }
             A = atoi(str);
-            blkCount[4]++;
 
             for(i = 0; i < 4; i++)
             {
@@ -252,11 +251,11 @@ void join()
                             for(k = 0; k < 8; k++)
                             {
                                 *(blk[5] + blkCount[5]*8 + k) = *(blk[4] + blkCount[4] * 8 + k);
-                                *(blk[5] + blkCount[5]*8 + k + 8) = *(blk[i] + blkCount[i] * 8 + k + 8);
+                                *(blk[5] + blkCount[5]*8 + k + 8) = *(blk[i] + blkCount[i] * 8 + k);
                             }
 
                             blkCount[5] += 2;
-                            if(blkCount[5] == 8)
+                            if(blkCount[5] == 6)
                             {
                                 // 存入缓冲区
                                 blkCount[5] = 7;
@@ -298,9 +297,23 @@ void join()
             {
                 freeBlockInBuffer(blk[k], &buf);
             }
+            blkCount[4]++;
         }
         freeBlockInBuffer(blk[4], &buf);
     }
+    itoa(writeAddr + 1, str, 10);
+    for(k = 0; k < 4; k++)
+    {
+        *(blk[5] + 8 * 7 + k) = str[k];
+    }
+    if(writeBlockToDisk(blk[5], writeAddr, &buf) == 0)
+    {
+        printf("结果写入磁盘%d\n", writeAddr);
+        writeAddr++;
+        blk[5] = getNewBlockInBuffer(&buf);
+    }
+    blkCount[5] = 0;
+    freeBuffer(&buf);
     printf("\n总共连接%d次", joinCount);
     return;
 }
