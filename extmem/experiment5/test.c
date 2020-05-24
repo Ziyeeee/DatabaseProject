@@ -3,6 +3,7 @@
 #include "extmem.h"
 
 void sort(unsigned char *blk[8], int numOfMember);
+void join();
 
 int main(int argc, char **argv)
 {
@@ -92,6 +93,8 @@ int main(int argc, char **argv)
     }
     printf("磁盘块中\n");
     freeBuffer(&buf);
+
+    join();
     return 0;
 }
 
@@ -165,5 +168,139 @@ void sort(unsigned char *blk[8], int numOfMember)
     }
     printf("\n");
 */
+    return;
+}
+
+void join()
+{
+    Buffer buf; /* A buffer */
+    unsigned char *blk[8] = {NULL}; /*pointers to a block */
+    int readRAddr = 101;
+    int readSAddr[4] = {117, 125, 133, 141};
+    int writeAddr = 201;
+    int i, j, k;
+    int A, C;
+    char str[5];
+    int blkCount[6] = {0};
+    int notFinish = 1;
+    int joinCount = 0;
+
+    /* Initialize the buffer */
+    if(!initBuffer(520, 64, &buf))
+    {
+        perror("Buffer Initialization Failed!\n");
+        return;
+    }
+
+    blk[5] = getNewBlockInBuffer(&buf);
+    while(readRAddr < 117)
+    {
+        blk[4] = readBlockFromDisk(readRAddr, &buf);
+        readRAddr++;
+        blkCount[4] = 0;
+
+        while(blkCount[4] < 7)
+        {
+            for(k = 0; k < 4; k++)
+            {
+                str[k] = *(blk[4] + blkCount[4] * 8 + k);
+                blkCount[k] = 0;
+            }
+            A = atoi(str);
+            blkCount[4]++;
+
+            for(i = 0; i < 4; i++)
+            {
+                readSAddr[i] = 117 + i * 8;
+                blk[i] = readBlockFromDisk(readSAddr[i], &buf);
+                readSAddr[i]++;
+            }
+
+            while(1)
+            {
+                // S是否已经完全遍历
+                notFinish = 0;
+                for(i = 0; i < 4; i++)
+                {
+                    if(blkCount[i] < 7)
+                    {
+                        notFinish = 1;
+                    }
+                }
+                if(!notFinish)
+                {
+                    break;
+                }
+
+                for(i = 0; i < 4; i++)
+                {
+                    if(blkCount[i] > 6)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        for(k = 0; k < 4; k++)
+                        {
+                            str[k] = *(blk[i] + blkCount[i] * 8 + k);
+                        }
+                        C = atoi(str);
+                        // printf("%d %d %d\n", C, readSAddr[i], blkCount[i]);
+                        if(A == C)
+                        {
+                            joinCount++;
+                            for(k = 0; k < 8; k++)
+                            {
+                                *(blk[5] + blkCount[5]*8 + k) = *(blk[4] + blkCount[4] * 8 + k);
+                                *(blk[5] + blkCount[5]*8 + k + 8) = *(blk[i] + blkCount[i] * 8 + k + 8);
+                            }
+
+                            blkCount[5] += 2;
+                            if(blkCount[5] == 8)
+                            {
+                                // 存入缓冲区
+                                blkCount[5] = 7;
+                                itoa(writeAddr + 1, str, 10);
+                                for(k = 0; k < 4; k++)
+                                {
+                                    *(blk[5] + 8 * 7 + k) = str[k];
+                                }
+                                if(writeBlockToDisk(blk[5], writeAddr, &buf) == 0)
+                                {
+                                    printf("结果写入磁盘%d\n", writeAddr);
+                                    writeAddr++;
+                                    blk[5] = getNewBlockInBuffer(&buf);
+                                }
+                                blkCount[5] = 0;
+                            }
+                        }
+                        else if(A > C)
+                        {
+                            blkCount[i] = 7;
+                        }
+
+                        // 后移一位
+                        if((blkCount[i] == 6) && (readSAddr[i] % 8 != 5))
+                        {
+                            freeBlockInBuffer(blk[i], &buf);
+                            blk[i] = readBlockFromDisk(readSAddr[i], &buf);
+                            readSAddr[i]++;
+                            blkCount[i] = 0;
+                        }
+                        else if(blkCount[i] != 7)
+                        {
+                            blkCount[i]++;
+                        }
+                    }
+                }
+            }
+            for(k = 0; k < 4; k++)
+            {
+                freeBlockInBuffer(blk[k], &buf);
+            }
+        }
+        freeBlockInBuffer(blk[4], &buf);
+    }
+    printf("\n总共连接%d次", joinCount);
     return;
 }
