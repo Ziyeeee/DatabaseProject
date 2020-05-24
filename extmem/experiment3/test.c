@@ -183,11 +183,13 @@ void select(int indexStartAddr, int writeAddr, int numOfDataBlk, int selectNum)
         writeBlk = getNewBlockInBuffer(&buf);
     }
 
-    freeBuffer(&buf);
+    
     printf("\n");
     printf("满足选择条件的元组一共%d个\n", selectNumCount);
     printf("\n");
     printf("IO读写一共%d次\n", buf.numIO);
     printf("\n");
+
+    freeBuffer(&buf);
     return;
 }
