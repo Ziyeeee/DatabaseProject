@@ -5,8 +5,14 @@
 int main(int argc, char **argv)
 {
     Buffer buf; /* A buffer */
-    unsigned char *blk; /* A pointer to a block */
-    int i = 0;
+    unsigned char *readBlk, *writeBlk; /* A pointer to a block */
+    int i, j, k;
+    int X = 0;
+    int Y = 0;
+    int numOfPi = 0;
+    int readAddr = 201;
+    int writeAddr = 301;
+    char str[5];
 
     /* Initialize the buffer */
     if (!initBuffer(520, 64, &buf))
@@ -15,60 +21,69 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    /* Get a new block in the buffer */
-    blk = getNewBlockInBuffer(&buf);
-
-    /* Fill data into the block */
-    for (i = 0; i < 8; i++)
-        *(blk + i) = 'a' + i;
-
-    /* Write the block to the hard disk */
-    if (writeBlockToDisk(blk, 8888, &buf) != 0)
+    writeBlk = getNewBlockInBuffer(&buf);
+    for(i = 0; i < 16; i++)
     {
-        perror("Writing Block Failed!\n");
-        return -1;
-    }
+        readBlk = readBlockFromDisk(readAddr, &buf);
+        printf("读入数据块%d\n", readAddr);
+        readAddr++;
 
-    /* Read the block from the hard disk */
-    if ((blk = readBlockFromDisk(1, &buf)) == NULL)
-    {
-        perror("Reading Block Failed!\n");
-        return -1;
-    }
-
-    /* Process the data in the block */
-    int X = -1;
-    int Y = -1;
-    int addr = -1;
-
-    char str[5];
-    printf("block 1:\n");
-    for (i = 0; i < 7; i++) //一个blk存7个元组加一个地址
-    {
-
-        for (int k = 0; k < 4; k++)
+        for(j =  0; j < 7; j++)
         {
-            str[k] = *(blk + i*8 + k);
+            for(k = 0; k < 4; k++)
+            {
+                str[k] = *(readBlk + j * 8 + k);
+            }
+            Y = atoi(str);
+
+            if(Y != X)
+            {
+                printf("(x = %d)\n", Y);
+                X = Y;
+
+                for(k = 0; k < 4; k++)
+                {
+                    *(writeBlk + (numOfPi % 14) * 4 + k) = *(readBlk + j * 8 + k);
+                }
+                numOfPi++;
+                if(numOfPi % 14 == 0)
+                {
+                    itoa(writeAddr + 1, str, 10);
+                    for (k = 0; k < 4; k++)
+                    {
+                        *(writeBlk + 7 * 8 + k) = str[k];
+                    }
+                    if(writeBlockToDisk(writeBlk, writeAddr, &buf) == 0);
+                    {
+                        printf("将结果写入磁盘%d中\n", writeAddr);
+                        writeAddr++;
+                        writeBlk = getNewBlockInBuffer(&buf);
+                    }
+                }
+            }
         }
-        X = atoi(str);
-        for (int k = 0; k < 4; k++)
-        {
-            str[k] = *(blk + i*8 + 4 + k);
-        }
-        Y = atoi(str);
-        printf("(%d, %d) ", X, Y);
+        freeBlockInBuffer(readBlk, &buf);
     }
-    for (int k = 0; k < 4; k++)
+    itoa(writeAddr + 1, str, 10);
+    for (k = 0; k < 4; k++)
     {
-        str[k] = *(blk + i*8 + k);
+        *(writeBlk + 7 * 8 + k) = str[k];
     }
-    addr = atoi(str);
-    printf("\nnext address = %d \n", addr);
+    if(writeBlockToDisk(writeBlk, writeAddr, &buf) == 0);
+    {
+        printf("将结果写入磁盘%d中\n", writeAddr);
+        writeAddr++;
+        writeBlk = getNewBlockInBuffer(&buf);
+    }
 
 
     printf("\n");
-    printf("IO's is %d\n", buf.numIO); /* Check the number of IO's */
+    printf("R上的A属性经投影后的属性值一共有%d个\n", numOfPi);
+    printf("\n");
+    printf("IO读写一共%d次\n", buf.numIO);
+    printf("\n");
 
+    freeBuffer(&buf);
     return 0;
 }
 
