@@ -38,6 +38,7 @@ void freeBuffer(Buffer *buf)
 unsigned char *getNewBlockInBuffer(Buffer *buf)
 {
     unsigned char *blkPtr;
+    int i;
 
     if (buf->numFreeBlk == 0)
     {
@@ -56,6 +57,11 @@ unsigned char *getNewBlockInBuffer(Buffer *buf)
     }
 
     *blkPtr = BLOCK_UNAVAILABLE;
+    for(i = 0; i < 64; i++)
+    {
+        *(blkPtr + 1 + i) = NULL;
+    }
+    buf->numFreeBlk--;
     buf->numFreeBlk--;
     return blkPtr + 1;
 }
