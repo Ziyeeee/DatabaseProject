@@ -247,6 +247,20 @@ void join()
                         // printf("%d %d %d\n", C, readSAddr[i], blkCount[i]);
                         if(A == C)
                         {
+                            /*
+                            int B, D;
+                            for(k = 0; k < 4; k++)
+                            {
+                                str[k] = *(blk[4] + blkCount[4] * 8 + k + 4);
+                            }
+                            B = atoi(str);
+                            for(k = 0; k < 4; k++)
+                            {
+                                str[k] = *(blk[i] + blkCount[i] * 8 + k + 4);
+                            }
+                            D= atoi(str);
+                            printf("(%d %d)(%d %d)\n", A, B, C, D);
+                            */
                             joinCount++;
                             for(k = 0; k < 8; k++)
                             {
